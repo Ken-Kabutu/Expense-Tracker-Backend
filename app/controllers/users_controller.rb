@@ -1,18 +1,32 @@
 class UsersController < ApplicationController
   # POST /users/register
   def register
-  # Create a new user with the provided parameters
-  @user = User.new(user_params)
+    @user = User.new(user_params)
+  
+    if @user.save
+      # If you are using session-based authentication:
+      session[:user_id] = @user.id
+      
+      # Return success message
+      render json: { message: 'User registered and logged in successfully' }, status: :created
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+  
+  # def register
+  # # Create a new user with the provided parameters
+  # @user = User.new(user_params)
   
   
-  if @user.save
-  # Successful registration
-  render json: { message: 'User registered successfully' }, status: :created
-  else
-  # Registration failed; return error messages
-  render json: @user.errors, status: :unprocessable_entity
-  end
-  end
+  # if @user.save
+  # # Successful registration
+  # render json: { message: 'User registered successfully' }, status: :created
+  # else
+  # # Registration failed; return error messages
+  # render json: @user.errors, status: :unprocessable_entity
+  # end
+  # end
   
   
   # POST /users/login
@@ -47,12 +61,10 @@ class UsersController < ApplicationController
   end
   private
   
-  
   def user_params
-  # Define the allowed user parameters for registration
-  params.require(:user).permit(:name, :email, :password)
+    params.permit(:name, :email, :password)
   end
-  
+    
   
   def generate_token(user)
   # Implement token generation logic here
