@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  resources :incomes
   resources :expenses, only: [:index, :show, :create, :update, :destroy]
+  
   
   post '/users/register', to: 'users#register'
   post '/users/login', to: 'users#login'
-  delete '/users/logout', to: 'users#logout'
-  get '/users/logged_in', to: 'users#logged_in_status'
-  resources :users, only: [:index, :show]
-end
+  get '/users', to: 'users#index'        # to get all users
+  get '/users/:id', to: 'users#show'     # to get a user by ID
+  end
+  
