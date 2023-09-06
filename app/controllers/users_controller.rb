@@ -32,7 +32,19 @@ class UsersController < ApplicationController
   end
   end
   
-  
+   # GET /users
+  def index
+    users = User.all
+    render json: users
+  end
+
+  # GET /users/:id
+  def show
+    user = User.find(params[:id])
+    render json: user
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "User not found" }, status: :not_found
+  end
   private
   
   
@@ -47,4 +59,3 @@ class UsersController < ApplicationController
   # Return a token that can be used for authentication
   end
   end
-  
