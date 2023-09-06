@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :incomes
   resources :expenses, only: [:index, :show, :create, :update, :destroy]
-
   
   
   post '/users/register', to: 'users#register'
@@ -10,4 +9,3 @@ Rails.application.routes.draw do
   get '/users/:id', to: 'users#show'     # to get a user by ID
   end
   
-
