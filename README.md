@@ -8,13 +8,15 @@ Follow the steps below to set up and run the backend of the Expense Tracker app:
 
 ### Prerequisites
 
-- Ruby (version X.X.X)
-- Rails (version X.X.X)
-- PostgreSQL (version X.X.X)
+- Ruby (version 2.7.4p191)
+- Rails (version  7.0.7)
+- PostgreSQL (version 14.9)
 
 ### Installation
 
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/expense-tracker-backend.git
+   git clone https://github.com/Ken-Kabutu/expense-tracker-backend.git
+
+2. 
