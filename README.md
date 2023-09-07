@@ -28,3 +28,13 @@ Follow the steps below to set up and run the backend of the Expense Tracker app:
 
    ```bash
    bundle install
+
+4. Create and migrate the database:
+
+   ```bash
+   rails db:create
+   rails db:migrate
+
+5. Start the Rails server:
+
+   ```bash
