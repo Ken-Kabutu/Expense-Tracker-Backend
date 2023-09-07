@@ -19,4 +19,12 @@ Follow the steps below to set up and run the backend of the Expense Tracker app:
    ```bash
    git clone https://github.com/Ken-Kabutu/expense-tracker-backend.git
 
-2. 
+2. Change into the project directory:
+
+   ```bash
+   cd expense-tracker-backend
+
+3. Install gem dependencies:
+
+   ```bash
+   bundle install
