@@ -42,8 +42,23 @@ Follow the steps below to set up and run the backend of the Expense Tracker app:
 
 
 ### API Endpoints
+
 * User Registration: 'POST /api/users'
 * User Login: 'POST /api/login'
 * User Logout: 'DELETE /api/logout'
 * Create Expense: 'POST /api/expenses'
 * List Expenses: 'GET /api/expenses'
+
+### Author
+
+
+* Kenneth Wachira
+* Maimunar omar
+* Alfred kimata
+* Faith Kamau
+* Isaiah Sikobe
+
+
+### License
+
+
