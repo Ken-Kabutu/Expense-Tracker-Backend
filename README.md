@@ -38,3 +38,12 @@ Follow the steps below to set up and run the backend of the Expense Tracker app:
 5. Start the Rails server:
 
    ```bash
+   rails server
+
+
+### API Endpoints
+* User Registration: 'POST /api/users'
+* User Login: 'POST /api/login'
+* User Logout: 'DELETE /api/logout'
+* Create Expense: 'POST /api/expenses'
+* List Expenses: 'GET /api/expenses'
