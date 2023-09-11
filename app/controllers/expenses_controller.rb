@@ -14,11 +14,12 @@ class ExpensesController < ApplicationController
 
   # POST /expenses
   def create
-    expenses = Expense.new(expense_params)
-    if income.save
-      render json: expenses, status: :created
+    expense = Expense.new(expense_params)
+    if expense.save
+      render json: expense, status: :created
     else
-      render json: expenses.errors, status: :unprocessable_entity
+      # will change
+      expense = Expense.new(expense_params)
     end
   end
 
@@ -44,6 +45,6 @@ class ExpensesController < ApplicationController
 
   def expense_params
     # Define the allowed expense parameters
-    params.require(:expense).permit(:description, :category, :date)
+    params.require(:expense).permit(:description, :category, :date, :user_id)
   end
 end

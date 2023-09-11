@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   # POST /users/register
   def register
+    Rails.logger.info "Received parameters: #{params.inspect}"
+
     @user = User.new(user_params)
 
     if @user.save
@@ -12,11 +14,15 @@ class UsersController < ApplicationController
       # Return success message
       render json: { message: "User registered and logged in successfully" }, status: :created
     else
-      render json: @user.errors, status: :unprocessable_entity
+      error_messages = @user.errors.full_messages
+      render json: { errors: error_messages }, status: :unprocessable_entity
     end
   end
 
- 
+  # GET /users/register
+  def new
+  end
+
   # POST /users/login
   def login
     # Find the user by email
@@ -50,8 +56,10 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:name, :email, :password)
+    user_data = params[:user] || params
+    user_data.permit(:name, :email, :password)
   end
+  
 
   def generate_token(user)
     # Implement token generation logic here
