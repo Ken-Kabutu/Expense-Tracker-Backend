@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
-  resources :incomes
+  resources :incomes, only: [:index, :show, :create, :update, :destroy]
   resources :expenses, only: [:index, :show, :create, :update, :destroy]
+  resources :users, only: [:index, :show, :create] # Added index and show for users.
 
-  post "/users/register", to: "users#register"
-  post "/users/login", to: "users#login"
-  get "/users", to: "users#index"
-  # More specific routes should be placed before the generic ones:
-  get "/users/register", to: "users#new" # if you need a registration form route
-  get "/users/:id", to: "users#show"
+  post "/login", to: "session#create"
+  delete "/logout", to: "session#destroy"
 end
