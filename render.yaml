@@ -6,6 +6,8 @@ services:
     name: rails
     env: ruby
     buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec rails server -p $3000"
+
     envVars:
       - key: RAILS_MASTER_KEY
         sync: false
