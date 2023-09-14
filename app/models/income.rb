@@ -1,3 +1,3 @@
 class Income < ApplicationRecord
-    belongs_to :users
+    belongs_to :user
 end

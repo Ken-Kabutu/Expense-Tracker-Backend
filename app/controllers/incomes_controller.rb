@@ -14,7 +14,7 @@ class IncomesController < ApplicationController
 
   # POST /incomes.json
   def create
-    income = current_user.incomes.new(income_params)
+    income = current_user.incomes.build(income_params)
     if income.save
       render json: income, status: :created
     else
