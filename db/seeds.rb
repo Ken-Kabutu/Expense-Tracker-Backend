@@ -9,50 +9,28 @@
 # db/seeds.rb
 
 # Create some expense categories
-expense_categories = ExpenseCategory.create([
-  { name: 'Food' },
-  { name: 'Transportation' },
-  { name: 'Entertainment' }
-])
 
-puts 'Expense categories created.'
 
-# Create a sample user with password_digest
-user = User.create(
-  name: 'John Doe',
-  email: 'john@example.com',
-  password_digest: BCrypt::Password.create('password') # Hash the password
+# Add more expenses as needed
+# db/seeds.rb
+
+# Create some example incomes
+Income.create(
+  title: "Salary",
+  description: "Monthly salary",
+  amount: 5000.0,
+  date: Date.today,
+  income_type: "Regular",
+  category: "Salary",
 )
 
-puts 'User created.'
+Income.create(
+  title: "Freelance Payment",
+  description: "Payment for freelance work",
+  amount: 1000.0,
+  date: Date.today - 7.days,
+  income_type: "Irregular",
+  category: "Freelance",
+)
 
-# Create some sample expenses associated with the user and expense categories
-expenses = Expense.create([
-  {
-    user: user,
-    expense_category: expense_categories[0],
-    amount: 25.50,
-    date: Date.today - 7,
-    description: 'Dinner at a restaurant'
-  },
-  {
-    user: user,
-    expense_category: expense_categories[1],
-    amount: 10.00,
-    date: Date.today - 5,
-    description: 'Bus fare'
-  },
-  {
-    user: user,
-    expense_category: expense_categories[2],
-    amount: 15.00,
-    date: Date.today - 3,
-    description: 'Movie ticket'
-  }
-])
-
-puts 'Expenses created.'
-
-# You can add more seed data as needed.
-
-puts 'Seed data populated successfully.'
+# Add more income records as needed...

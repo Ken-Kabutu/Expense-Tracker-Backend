@@ -34,6 +34,22 @@ module ReactRailsApiProjectTemplate
 
     # Configuration for the application, engines, and railties goes here.
     #
+    # config.middleware.insert_before 0, Rack::Cors do
+    #   allow do
+    #     origins "http://localhost:5173/" # Replace with your frontend's URL
+    #     resource "*", headers: :any, methods: [:get, :post, :put, :patch, :delete, :options, :head]
+    #   end
+    # end
+    Rails.application.routes.draw do
+      namespace :api do
+        resources :incomes
+        resources :expenses, only: [:index, :show, :create, :update, :destroy]
+      end
+
+      post "/login", to: "session#create"
+      delete "/logout", to: "session#destroy"
+    end
+
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #

@@ -1,64 +1,48 @@
 class ExpensesController < ApplicationController
   before_action :set_expense, only: [:show, :update, :destroy]
-  
-  
-  # GET /expenses
+
+  # GET /expenses.json
   def index
-  @expenses = Expense.all
-  render json: @expenses
+    expenses = current_user.expenses
+    render json: expenses
   end
-  
-  
-  # GET /expenses/1
-  def show
-  render json: @expense
-  end
-  
-  
-  # POST /expenses
+
+  # POST /expenses.json
   def create
-  @expense = Expense.new(expense_params)
-  
-  
-  # Set the user who incurred the expense (you'll need to define 'current_user')
-  @expense.user = current_user
-  
-  
-  if @expense.save
-  render json: @expense, status: :created
-  else
-  render json: @expense.errors, status: :unprocessable_entity
+    expense = current_user.expenses.new(expense_params)
+    if expense.save
+      render json: expense, status: :created
+    else
+      render json: expense.errors, status: :unprocessable_entity
+    end
   end
-  end
-  
-  
-  # PATCH/PUT /expenses/1
+
+  # PATCH/PUT /expenses/1.json
   def update
-  if @expense.update(expense_params)
-  render json: @expense
-  else
-  render json: @expense.errors, status: :unprocessable_entity
+    if @expense.update(expense_params)
+      render json: @expense
+    else
+      render json: @expense.errors, status: :unprocessable_entity
+    end
   end
-  end
-  
-  
-  # DELETE /expenses/1
+
+  # DELETE /expenses/1.json
   def destroy
-  @expense.destroy
+    @expense.destroy
+    head :no_content
   end
-  
-  
+
   private
-  
-  
+
+  # Use callbacks to share common setup or constraints between actions.
   def set_expense
-  @expense = Expense.find(params[:id])
+    @expense = current_user.expenses.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "Expense not found or you don't have permission to access it" }, status: :not_found
   end
-  
-  
+
+  # Only allow a list of trusted parameters through.
   def expense_params
-  # Define the allowed expense parameters
-  params.require(:expense).permit(:description, :amount, :date)
+    params.require(:expense).permit(:id, :title, :description, :amount, :date, :expense_type, :category)
   end
-  end
-  
+end
