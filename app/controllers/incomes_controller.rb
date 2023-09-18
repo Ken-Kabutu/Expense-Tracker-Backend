@@ -1,9 +1,9 @@
 class IncomesController < ApplicationController
-  before_action :set_income, only: [:show, :update]
+  before_action :set_income, only: %i[show update]
 
   # GET /incomes.json
   def index
-    incomes = current_user.incomes
+    incomes = @current_user.incomes
     render json: incomes
   end
 
@@ -14,7 +14,7 @@ class IncomesController < ApplicationController
 
   # POST /incomes.json
   def create
-    income = current_user.incomes.build(income_params)
+    income = @current_user.incomes.build(income_params)
     if income.save
       render json: income, status: :created
     else
@@ -42,7 +42,7 @@ class IncomesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_income
-    @income = current_user.incomes.find(params[:id])
+    @income = @current_user.incomes.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render json: { error: "Income not found or you don't have permission to access it" }, status: :not_found
   end

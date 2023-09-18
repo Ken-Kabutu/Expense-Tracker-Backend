@@ -22,7 +22,7 @@ Bundler.require(*Rails.groups)
 module ReactRailsApiProjectTemplate
   class Application < Rails::Application
     # Adding cookies and session middleware
-    config.api_only = false
+    config.api_only = true
 
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
@@ -38,7 +38,7 @@ module ReactRailsApiProjectTemplate
     #
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'http://localhost:5173'
+        origins 'http://127.0.0.1:5173' # Including both just in case
 
         resource '*',
                  headers: :any,

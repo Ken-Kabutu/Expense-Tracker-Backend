@@ -3,13 +3,13 @@ class ExpensesController < ApplicationController
 
   # GET /expenses.json
   def index
-    expenses = current_user.expenses
+    expenses = @current_user.expenses
     render json: expenses
   end
 
   # POST /expenses.json
   def create
-    expense = current_user.expenses.new(expense_params)
+    expense = @current_user.expenses.new(expense_params)
     if expense.save
       render json: expense, status: :created
     else
@@ -36,7 +36,7 @@ class ExpensesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_expense
-    @expense = current_user.expenses.find(params[:id])
+    @expense = @current_user.expenses.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render json: { error: "Expense not found or you don't have permission to access it" }, status: :not_found
   end
