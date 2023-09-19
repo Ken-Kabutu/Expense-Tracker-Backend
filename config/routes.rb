@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
+  resources :incomes
+  resources :expenses, only: [:index, :show, :create, :update, :destroy]
   
-  # Routing logic: fallback requests for React Router.
-  # Leave this here to help deploy your app later!
-  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
-end
+  
+  post '/users/register', to: 'users#register'
+  post '/users/login', to: 'users#login'
+  get '/users', to: 'users#index'        # to get all users
+  get '/users/:id', to: 'users#show'     # to get a user by ID
+  end
+  
